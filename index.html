@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fa">
+  <title>音楽と集中力｜探究実験</title>
+
+  <style>
+    :root {
+      --navy: #20354f;
+      --blue: #426b9a;
+      --blue-light: #edf3fa;
+      --bg: #f5f7fa;
+      --text: #273444;
+      --muted: #64748b;
+      --border: #e0e6ed;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 36px, 920px);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 18px 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .id-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .id-value {
+      display: block;
+      color: var(--navy);
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    main {
+      padding: 42px 0 60px;
+    }
+
+    .hero {
+      margin-bottom: 34px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: clamp(27px, 5vw, 39px);
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+    }
+
+    .intro {
+      max-width: 650px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .section-title {
+      margin: 36px 0 14px;
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .page-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .page-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 190px;
+      padding: 23px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .page-card:hover {
+      border-color: #91a9c6;
+      transform: translateY(-2px);
+    }
+
+    .page-number {
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .page-card h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .page-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-link {
+      margin-top: auto;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .arrow {
+      padding-left: 5px;
+    }
+
+    .notice {
+      padding: 23px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .notice h3 {
+      margin: 0 0 15px;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    .notice ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .notice li {
+      margin: 9px 0;
+      padding-left: 3px;
+      font-size: 14px;
+    }
+
+    .notice strong {
+      color: var(--navy);
+    }
+
+    .id-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      margin-top: 18px;
+      padding: 17px 19px;
+      background: var(--blue-light);
+      border-radius: 10px;
+    }
+
+    .info-mark {
+      color: var(--blue);
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .id-info p {
+      margin: 0;
+      color: #40536a;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 22px 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 28px, 920px);
+      }
+
+      main {
+        padding-top: 30px;
+      }
+
+      .page-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .page-card {
+        min-height: 0;
+        padding: 20px;
+      }
+
+      .header-inner {
+        align-items: flex-start;
+      }
+
+      .brand {
+        max-width: 48%;
+      }
+
+      .notice {
+        padding: 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+    .id-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    .copy-button {
+        padding: 5px 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #426b9a;
+        font-size: 12px;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .copy-button:hover {
+        background: #edf3fa;
+    }
+
+    #copy-message {
+        display: block;
+        font-size: 11px;
+        color: #426b9a;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="brand">探究活動｜音楽と集中力</div>
+
+    <div class="id-label">
+        あなたの被験者ID
+
+        <div class="id-container">
+            <span class="id-value" id="participant-id">
+                読み込み中...
+            </span>
+
+            <button
+                type="button"
+                id="copy-id-button"
+                class="copy-button"
+            >
+                コピー
+            </button>
+        </div>
+
+        <span id="copy-message" aria-live="polite"></span>
+    </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">RESEARCH PROJECT</p>
+      <h1>音楽のコード進行は<br>集中力に影響するのか？</h1>
+      <p class="intro">
+        このページから、探究活動の実験と練習に参加できます。<br>
+        実験を始める前に、<strong>下の注意事項を確認してください。</strong>
+      </p>
+    </section>
+
+    <section aria-labelledby="pages-title">
+      <h2 class="section-title" id="pages-title">
+        実験・練習・アンケートページ
+      </h2>
+
+      <div class="page-list">
+        <a class="page-card" href="https://fuchiman.github.io/concentration-test2/">
+          <span class="page-number">EXPERIMENT 02</span>
+          <h3>実験２</h3>
+          <p>
+            ４回で１セットです。こちらの実験をお願いします。
+          </p>
+          <span class="card-link">
+            実験ページへ <span class="arrow">→</span>
+          </span>
+        </a>
+
+        <a class="page-card" href="https://fuchiman.github.io/concentration-test/">
+          <span class="page-number">EXPERIMENT 01</span>
+          <h3>実験１</h3>
+          <p>
+            ３回で１セットです。指示がない場合はやらなくて結構です。
+          </p>
+          <span class="card-link">
+            実験ページへ <span class="arrow">→</span>
+          </span>
+        </a>
+
+        <a class="page-card" href="https://fuchiman.github.io/demo-concentration-test/">
+          <span class="page-number">PRACTICE</span>
+          <h3>練習ページ</h3>
+          <p>
+            実験本番の前に、計算課題の操作方法を
+            確認・練習できます。<br>
+            はじめての人は必ずお願いします。
+          </p>
+          <span class="card-link">
+            練習ページへ <span class="arrow">→</span>
+          </span>
+        </a>
+        <a class="page-card" href="https://docs.google.com/forms/d/e/1FAIpQLSczUERFKLxYGvbOLijRMVyVEGtbHlfkU_5POfhrGApU8mqgOQ/viewform">
+            <span class="page-number">QUESTIONNAIRE</span>
+            <h3>アンケート</h3>
+            <p>
+                実験に関するアンケートもお願いします。
+                回答には被験者IDが必要になるので、画面右上のボタンからコピーして回答してください。
+            </p>
+            <span class="card-link">
+                アンケートページへ <span class="arrow">→</span>
+            </span>
+        </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="notice-title">
+      <h2 class="section-title" id="notice-title">
+        実験に参加する前の注意事項
+      </h2>
+
+      <div class="notice">
+        <h3>正確なデータを得るために</h3>
+        <ol>
+          <li>
+            <strong>静かな環境で座って行う。</strong>
+            周囲の会話や雑音が少ない場所で、座って実施してください。
+          </li>
+          <li>
+            <strong>音が聞こえる状態にする。</strong>
+            イヤホンまたはヘッドホンを使用し、
+            音量は無理なく聞こえる程度に調整してください。
+          </li>
+          <li>
+            <strong>実験１では、音楽が流れない場合がある。</strong>
+            それは比較のための実験ですので、問題ないです。実験２以降では必ず音楽が流れます。
+          </li>
+          <li>
+            <strong>はじめての人は最初に練習をする。</strong>
+            計算課題の操作方法を理解しておいてください。練習ページでは音楽は流れません。
+          </li>
+          <li>
+            <strong>実験中は別の操作をしない。</strong>
+            他のアプリやページへの移動、通知の確認などは
+            できるだけ避けてください。
+          </li>
+          <li>
+            <strong>開始前に準備を済ませる。</strong>
+            トイレや飲み物などを済ませ、
+            中断せずに取り組める状態にしてください。
+          </li>
+        </ol>
+      </div>
+
+      <div class="id-info">
+        <span class="info-mark">i</span>
+        <p>
+          <strong>被験者IDについて</strong><br>
+          IDは初回アクセス時に自動生成され、
+          このブラウザに保存されます。
+          実験ページでも同じIDが使用されます。
+          データの対応関係を保つため、
+          保存データやブラウザの設定を消去しないでください。
+          また、毎実験、必ず同じブラウザで開いてください。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    音楽と集中力に関する探究活動
+  </footer>
+
+    <script>
+
+    function generateDeviceId() {
+
+        const chars =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "abcdefghijklmnopqrstuvwxyz" +
+            "0123456789";
+
+        const randomValues =
+            new Uint32Array(16);
+
+        crypto.getRandomValues(randomValues);
+
+        return Array.from(randomValues, value =>
+            chars[value % chars.length]
+        ).join("");
+
+    }
+
+
+    // localStorageからdeviceIdを取得
+    let deviceId =
+        localStorage.getItem("deviceId");
+
+
+    // deviceIdを持っていない場合のみ生成
+    if (!deviceId) {
+
+        deviceId =
+            generateDeviceId();
+
+        localStorage.setItem(
+            "deviceId",
+            deviceId
+        );
+
+    }
+
+
+    // 画面にdeviceIdを表示
+    document.getElementById(
+        "participant-id"
+    ).textContent = deviceId;
+
+    // IDのコピー処理
+    document.getElementById(
+        "copy-id-button"
+    ).addEventListener("click", async () => {
+
+        const message =
+            document.getElementById("copy-message");
+
+        try {
+
+            await navigator.clipboard.writeText(deviceId);
+
+            message.textContent = "コピーしました！";
+
+        } catch (error) {
+
+            message.textContent =
+                "コピーできません。IDを手動でコピーしてください。";
+
+        }
+
+    });
+
+    </script>
+</body>
+</html>
